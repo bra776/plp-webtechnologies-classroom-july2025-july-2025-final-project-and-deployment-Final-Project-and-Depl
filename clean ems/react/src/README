@@ -1,0 +1,150 @@
+# Vite + React + Tailwind Starter App
+
+
+
+## Features
+
+* **React + Vite**: Fast development with Vite.
+* **Tailwind CSS**: Utility-first CSS framework for responsive styling.
+* **Routing**: React Router v6 setup with multiple pages.
+* **Task Manager**: Add, complete, delete, and filter tasks.
+* **API Integration**: Fetch posts from JSONPlaceholder with pagination and search.
+* **Theme Switching**: Light and dark mode using context and Tailwind's dark mode.
+* **Reusable Components**: Button, Card, Navbar, Footer, and Layout components.
+* **Custom Hook**: `useLocalStorage` for persistent state.
+* **Testing**: Basic setup using Vitest and React Testing Library.
+
+## Project Structure
+
+```
+my-vite-app/
+├─ public/
+├─ src/
+│  ├─ components/
+│  │  ├─ Button.jsx
+│  │  ├─ Card.jsx
+│  │  ├─ Navbar.jsx
+│  │  ├─ Footer.jsx
+│  │  └─ Layout.jsx
+│  ├─ context/
+│  │  └─ ThemeContext.jsx
+│  ├─ hooks/
+│  │  └─ useLocalStorage.js
+│  ├─ pages/
+│  │  ├─ Home.jsx
+│  │  ├─ TasksPage.jsx
+│  │  └─ ApiPage.jsx
+│  ├─ tasks/
+│  │  └─ TaskManager.jsx
+│  ├─ index.css
+│  └─ main.jsx
+├─ package.json
+├─ tailwind.config.cjs
+└─ postcss.config.cjs
+```
+
+## Quick Setup
+
+```bash
+# 1) Create Vite React app (JS template)
+npm create vite@latest my-vite-app -- --template react
+cd my-vite-app
+
+# 2) Install dependencies
+npm install react-router-dom@6
+
+# 3) Install Tailwind CSS
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+
+# 4) Install optional testing dependencies
+npm install -D vitest @testing-library/react @testing-library/jest-dom jsdom
+
+# 5) Start dev server
+npm run dev
+```
+
+## Tailwind Configuration
+
+`tailwind.config.cjs`
+
+```js
+module.exports = {
+  content: ['./index.html', './src/**/*.{js,jsx}'],
+  darkMode: 'class',
+  theme: { extend: {} },
+  plugins: []
+}
+```
+
+`postcss.config.cjs`
+
+```js
+module.exports = {
+  plugins: { tailwindcss: {}, autoprefixer: {} }
+}
+```
+
+## Components
+
+* **Button.jsx**: Custom button component with variants `primary`, `secondary`, `danger`.
+* **Card.jsx**: Card container for content with shadow and dark mode support.
+* **Navbar.jsx**: Navigation bar with links and theme toggle.
+* **Footer.jsx**: Footer with copyright and links.
+* **Layout.jsx**: Layout wrapper containing Navbar, Footer, and main content.
+
+## Pages
+
+* **Home.jsx**: Landing page with welcome message.
+* **TasksPage.jsx**: Task management page using `TaskManager` component.
+* **ApiPage.jsx**: Fetch and display posts from JSONPlaceholder API.
+
+## TaskManager Component
+
+* Add tasks.
+* Mark tasks as completed.
+* Delete tasks.
+* Filter tasks: All, Active, Completed.
+* State persisted using `useLocalStorage`.
+
+## API Page
+
+* Fetch posts from `https://jsonplaceholder.typicode.com/posts`.
+* Pagination (next/prev page).
+* Search posts by title or body.
+* Loading and error states.
+
+## Theme Context
+
+* Uses React context to store `theme` (`light`/`dark`).
+* Persisted in `localStorage`.
+* Theme toggled via Navbar button.
+
+## Testing
+
+Basic example using Vitest and React Testing Library:
+
+```jsx
+import { render, screen } from '@testing-library/react'
+import Button from '../components/Button.jsx'
+
+describe('Button', () => {
+  it('renders children', () => {
+    render(<Button>Click me</Button>)
+    expect(screen.getByText('Click me')).toBeInTheDocument()
+  })
+})
+```
+
+Run tests:
+
+```bash
+npm run test
+```
+
+## Running the App
+
+```bash
+npm run dev
+```
+
